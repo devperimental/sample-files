@@ -1,0 +1,8 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/src/code/.vs/Sample
+/src/code/BillingUsageService/bin
+/src/code/BillingUsageService/obj
