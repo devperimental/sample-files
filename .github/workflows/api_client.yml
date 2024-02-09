@@ -1,0 +1,50 @@
+name: API Client Pipeline
+on:
+  push:
+    branches:
+      - 'main'
+env:
+  nuget-username: chrisxpr
+  src-dir: ./src/code
+  coverage-threshold: 0
+  repo-organisation: architected
+  team-pat: ${{ secrets.NUGET_PAT}}
+  service_key: portal-api
+  target_environment: dev
+
+concurrency: alpha-${{ github.ref}}
+jobs:
+  dotnetBuild:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    environment: dev
+    timeout-minutes: 20
+    steps:
+      - name: Checkout action
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+
+      - name: buildAndTest
+        uses: devperimental/composite-action-library/dotnet-build-and-test@v3
+        with:
+          nuget-username: ${{ env.nuget-username }}
+          src-dir: ${{ env.src-dir }}
+          coverage-threshold: ${{ env.coverage-threshold }}
+          repo-organisation: ${{ env.repo-organisation }}
+          team-pat: ${{ env.team-pat }}
+
+      - name: Generate API Definition
+        id: generate-step
+        run: |
+          cd ./src/code/PortalApi/bin/Release/net7.0
+          zip swagger.zip *.swagger.yaml
+          echo "swagger=`base64 -w 0 swagger.zip`" >> "$GITHUB_OUTPUT"
+
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ env.team-pat }}
+          repository: devperimental/portal-api-client-csharp
+          event-type: api-definition-change
+          client-payload: '{"repo": "${{github.repository}}","actor": "${{github.actor}}","swagger": "${{steps.generate-step.outputs.swagger}}", "swagger-file-name": "portal-api", "api-library-name": "PortalApiClient", "pr-branch-name": "alpha-portal-${{ github.ref}}", "ref": "${{github.ref}}","sha": "${{github.sha}}"}'

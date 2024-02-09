@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DomainX.Shared\DomainX.Shared.csproj" />
+    <ProjectReference Include="..\PlatformX.ServiceLayer.Common\PlatformX.ServiceLayer.Common.csproj" />
+  </ItemGroup>
+
+</Project>

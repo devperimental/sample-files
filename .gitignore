@@ -4,5 +4,5 @@
 
 /.vs
 /src/code/.vs/Sample
-/src/code/BillingUsageService/bin
-/src/code/BillingUsageService/obj
+/src/code/**/bin
+/src/code/**/obj

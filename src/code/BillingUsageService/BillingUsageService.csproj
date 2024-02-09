@@ -1,0 +1,66 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <AWSProjectType>Lambda</AWSProjectType>
+    <!-- This property makes the build directory similar to a publish directory and helps the AWS .NET Lambda Mock Test Tool find project dependencies. -->
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <!-- Generate ready to run images during publishing to improve cold start time. -->
+    <PublishReadyToRun>true</PublishReadyToRun>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="appsettings.Development.json" />
+    <None Remove="appsettings.json" />
+    <None Remove="appsettings.Local.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="appsettings.Local.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="appsettings.Development.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Amazon.Lambda.Core" Version="2.2.0" />
+    <PackageReference Include="Amazon.Lambda.Serialization.SystemTextJson" Version="2.4.0" />
+    <PackageReference Include="Amazon.Lambda.SNSEvents" Version="2.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
+	<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="6.0.1" />
+	<PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="6.0.0" />
+	<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.1" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="PlatformX.DataAccess.Helper" Version="1.1.0-alpha-3.78" />
+		<PackageReference Include="PlatformX.FileStore" Version="1.1.0-alpha-3.78" />
+		<PackageReference Include="PlatformX.Http.Helper" Version="1.2.0" />
+		<PackageReference Include="PlatformX.Startup" Version="1.4.0-alpha-5.10" />
+		<PackageReference Include="PlatformX.StorageProvider.S3" Version="1.1.0-alpha-3.78" />
+		<PackageReference Include="PlatformX.Utility" Version="1.1.0-alpha-3.78" />
+		<PackageReference Include="WebX.Common" Version="1.1.0-alpha-3.78" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\DataAccess.Billing\DataAccess.Billing.csproj" />
+	  <ProjectReference Include="..\DataAccess.Portal\DataAccess.Portal.csproj" />
+	  <ProjectReference Include="..\Providers.Payment.Stripe\Providers.Payment.Stripe.csproj" />
+	  <ProjectReference Include="..\Providers.Portal\Providers.Portal.csproj" />
+	  <ProjectReference Include="..\Repository.Billing\Repository.Billing.csproj" />
+	  <ProjectReference Include="..\Repository.Portal\Repository.Portal.csproj" />
+	  <ProjectReference Include="..\ServiceLayer.Portal\ServiceLayer.Portal.csproj" />
+	</ItemGroup>
+
+</Project>

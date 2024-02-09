@@ -1,0 +1,66 @@
+name: Main Pipeline
+on:
+  push:
+    branches:
+      - 'main'
+env:
+  nuget-username: chrisxpr
+  src-dir: ./src/code
+  cdk-dir: ./cdk
+  coverage-threshold: 0
+  repo-organisation: architected
+  team-pat: ${{ secrets.NUGET_PAT}}
+  cdk_action: deploy
+  aws_secret: ${{ secrets.AWS_SECRET}}
+  aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID}}
+  aws_region: ap-southeast-2
+  service_key: portal-api
+  ecr_repository_name: portal-api
+  target_environment: dev
+  aspnet_environment: Development
+  run_number: ${{ github.run_number}}
+
+concurrency: main-${{ github.ref}}
+jobs:
+  dotnetBuild:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    environment: dev
+    timeout-minutes: 20
+    steps:
+      - name: Checkout action
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+
+      - name: buildAndTest
+        uses: devperimental/composite-action-library/dotnet-build-and-test@v2
+        with:
+          nuget-username: ${{ env.nuget-username }}
+          src-dir: ${{ env.src-dir }}
+          coverage-threshold: ${{ env.coverage-threshold }}
+          repo-organisation: ${{ env.repo-organisation }}
+          team-pat: ${{ env.team-pat }}
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ env.aws_access_key_id }}
+          aws-secret-access-key: ${{ env.aws_secret }}
+          aws-region: ${{ env.aws_region }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push the image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ env.ecr_repository_name }}
+          IMAGE_TAG: ${{ env.target_environment}}
+          SRC_DIR: ${{ env.src-dir }}
+        run: |
+          cd $SRC_DIR
+          docker build --build-arg NUGET_USERNAME=${{ env.nuget-username }} --build-arg NUGET_PAT=${{ env.team-pat }} --build-arg NUGET_ORGANISATION=${{ env.repo-organisation }} -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          echo "name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
