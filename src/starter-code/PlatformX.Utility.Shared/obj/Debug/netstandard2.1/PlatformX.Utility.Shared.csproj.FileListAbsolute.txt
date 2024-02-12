@@ -1,0 +1,9 @@
+D:\devperimental\component-api-libraries\src\code\PlatformX.Utility.Shared\bin\Debug\netstandard2.1\PlatformX.Utility.Shared.deps.json
+D:\devperimental\component-api-libraries\src\code\PlatformX.Utility.Shared\bin\Debug\netstandard2.1\PlatformX.Utility.Shared.dll
+D:\devperimental\component-api-libraries\src\code\PlatformX.Utility.Shared\bin\Debug\netstandard2.1\PlatformX.Utility.Shared.pdb
+D:\devperimental\component-api-libraries\src\code\PlatformX.Utility.Shared\obj\Debug\netstandard2.1\PlatformX.Utility.Shared.GeneratedMSBuildEditorConfig.editorconfig
+D:\devperimental\component-api-libraries\src\code\PlatformX.Utility.Shared\obj\Debug\netstandard2.1\PlatformX.Utility.Shared.AssemblyInfoInputs.cache
+D:\devperimental\component-api-libraries\src\code\PlatformX.Utility.Shared\obj\Debug\netstandard2.1\PlatformX.Utility.Shared.AssemblyInfo.cs
+D:\devperimental\component-api-libraries\src\code\PlatformX.Utility.Shared\obj\Debug\netstandard2.1\PlatformX.Utility.Shared.csproj.CoreCompileInputs.cache
+D:\devperimental\component-api-libraries\src\code\PlatformX.Utility.Shared\obj\Debug\netstandard2.1\PlatformX.Utility.Shared.dll
+D:\devperimental\component-api-libraries\src\code\PlatformX.Utility.Shared\obj\Debug\netstandard2.1\PlatformX.Utility.Shared.pdb

@@ -1,0 +1,448 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\devperimental\\portal-api\\src\\code\\BillingUsageService\\PortalLogParser.csproj": {}
+  },
+  "projects": {
+    "D:\\devperimental\\portal-api\\src\\code\\BillingUsageService\\PortalLogParser.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\devperimental\\portal-api\\src\\code\\BillingUsageService\\PortalLogParser.csproj",
+        "projectName": "PortalLogParser",
+        "projectPath": "D:\\devperimental\\portal-api\\src\\code\\BillingUsageService\\PortalLogParser.csproj",
+        "packagesPath": "C:\\Users\\chris\\.nuget\\packages\\",
+        "outputPath": "D:\\devperimental\\portal-api\\src\\code\\BillingUsageService\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\chris\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.pkg.github.com/architected/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "D:\\devperimental\\portal-api\\src\\code\\DataAccess.Billing\\DataAccess.Billing.csproj": {
+                "projectPath": "D:\\devperimental\\portal-api\\src\\code\\DataAccess.Billing\\DataAccess.Billing.csproj"
+              },
+              "D:\\devperimental\\portal-api\\src\\code\\Providers.LogParsing.Cloudwatch\\Providers.LogParsing.Cloudwatch.csproj": {
+                "projectPath": "D:\\devperimental\\portal-api\\src\\code\\Providers.LogParsing.Cloudwatch\\Providers.LogParsing.Cloudwatch.csproj"
+              },
+              "D:\\devperimental\\portal-api\\src\\code\\Repository.Billing\\Repository.Billing.csproj": {
+                "projectPath": "D:\\devperimental\\portal-api\\src\\code\\Repository.Billing\\Repository.Billing.csproj"
+              },
+              "D:\\devperimental\\portal-api\\src\\code\\ServiceLayer.Billing\\ServiceLayer.Billing.csproj": {
+                "projectPath": "D:\\devperimental\\portal-api\\src\\code\\ServiceLayer.Billing\\ServiceLayer.Billing.csproj"
+              },
+              "D:\\devperimental\\portal-api\\src\\code\\Settings.LogParsing\\Settings.LogParsing.csproj": {
+                "projectPath": "D:\\devperimental\\portal-api\\src\\code\\Settings.LogParsing\\Settings.LogParsing.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Amazon.Lambda.Core": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Amazon.Lambda.SNSEvents": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            },
+            "Amazon.Lambda.Serialization.SystemTextJson": {
+              "target": "Package",
+              "version": "[2.4.0, )"
+            },
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            },
+            "Microsoft.Extensions.Configuration.EnvironmentVariables": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            },
+            "Microsoft.Extensions.Configuration.FileExtensions": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            },
+            "PlatformX.DataAccess.Helper": {
+              "target": "Package",
+              "version": "[1.1.0-alpha-3.71, )"
+            },
+            "PlatformX.FileStore": {
+              "target": "Package",
+              "version": "[1.1.0-alpha-3.71, )"
+            },
+            "PlatformX.Http.Helper": {
+              "target": "Package",
+              "version": "[1.2.0, )"
+            },
+            "PlatformX.Startup": {
+              "target": "Package",
+              "version": "[1.4.0-alpha-5.10, )"
+            },
+            "PlatformX.StorageProvider.S3": {
+              "target": "Package",
+              "version": "[1.1.0-alpha-3.71, )"
+            },
+            "PlatformX.Utility": {
+              "target": "Package",
+              "version": "[1.1.0-alpha-3.71, )"
+            },
+            "WebX.Common": {
+              "target": "Package",
+              "version": "[1.1.0-alpha-3.71, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Crossgen2.win-x64",
+              "version": "[6.0.21, 6.0.21]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\devperimental\\portal-api\\src\\code\\DataAccess.Billing.Shared\\DataAccess.Billing.Shared.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\devperimental\\portal-api\\src\\code\\DataAccess.Billing.Shared\\DataAccess.Billing.Shared.csproj",
+        "projectName": "DataAccess.Billing.Shared",
+        "projectPath": "D:\\devperimental\\portal-api\\src\\code\\DataAccess.Billing.Shared\\DataAccess.Billing.Shared.csproj",
+        "packagesPath": "C:\\Users\\chris\\.nuget\\packages\\",
+        "outputPath": "D:\\devperimental\\portal-api\\src\\code\\DataAccess.Billing.Shared\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\chris\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.pkg.github.com/architected/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "dependencies": {
+            "DomainX.Portal.Shared": {
+              "target": "Package",
+              "version": "[1.1.0-alpha-3.71, )"
+            },
+            "PlatformX.Messaging.Types": {
+              "target": "Package",
+              "version": "[1.0.0-alpha-1.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\devperimental\\portal-api\\src\\code\\DataAccess.Billing\\DataAccess.Billing.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\devperimental\\portal-api\\src\\code\\DataAccess.Billing\\DataAccess.Billing.csproj",
+        "projectName": "DataAccess.Billing",
+        "projectPath": "D:\\devperimental\\portal-api\\src\\code\\DataAccess.Billing\\DataAccess.Billing.csproj",
+        "packagesPath": "C:\\Users\\chris\\.nuget\\packages\\",
+        "outputPath": "D:\\devperimental\\portal-api\\src\\code\\DataAccess.Billing\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\chris\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.pkg.github.com/architected/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {
+              "D:\\devperimental\\portal-api\\src\\code\\DataAccess.Billing.Shared\\DataAccess.Billing.Shared.csproj": {
+                "projectPath": "D:\\devperimental\\portal-api\\src\\code\\DataAccess.Billing.Shared\\DataAccess.Billing.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "dependencies": {
+            "PlatformX.DataAccess.Common": {
+              "target": "Package",
+              "version": "[1.1.0-alpha-3.71, )"
+            },
+            "PlatformX.Messaging.Types": {
+              "target": "Package",
+              "version": "[1.0.0-alpha-1.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\devperimental\\portal-api\\src\\code\\Repository.Billing.Shared\\Repository.Billing.Shared.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\devperimental\\portal-api\\src\\code\\Repository.Billing.Shared\\Repository.Billing.Shared.csproj",
+        "projectName": "Repository.Billing.Shared",
+        "projectPath": "D:\\devperimental\\portal-api\\src\\code\\Repository.Billing.Shared\\Repository.Billing.Shared.csproj",
+        "packagesPath": "C:\\Users\\chris\\.nuget\\packages\\",
+        "outputPath": "D:\\devperimental\\portal-api\\src\\code\\Repository.Billing.Shared\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\chris\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.pkg.github.com/architected/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "dependencies": {
+            "DomainX.Portal.Shared": {
+              "target": "Package",
+              "version": "[1.1.0-alpha-3.71, )"
+            },
+            "PlatformX.Messaging.Types": {
+              "target": "Package",
+              "version": "[1.0.0-alpha-1.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\devperimental\\portal-api\\src\\code\\Repository.Billing\\Repository.Billing.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\devperimental\\portal-api\\src\\code\\Repository.Billing\\Repository.Billing.csproj",
+        "projectName": "Repository.Billing",
+        "projectPath": "D:\\devperimental\\portal-api\\src\\code\\Repository.Billing\\Repository.Billing.csproj",
+        "packagesPath": "C:\\Users\\chris\\.nuget\\packages\\",
+        "outputPath": "D:\\devperimental\\portal-api\\src\\code\\Repository.Billing\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\chris\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.pkg.github.com/architected/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {
+              "D:\\devperimental\\portal-api\\src\\code\\DataAccess.Billing.Shared\\DataAccess.Billing.Shared.csproj": {
+                "projectPath": "D:\\devperimental\\portal-api\\src\\code\\DataAccess.Billing.Shared\\DataAccess.Billing.Shared.csproj"
+              },
+              "D:\\devperimental\\portal-api\\src\\code\\Repository.Billing.Shared\\Repository.Billing.Shared.csproj": {
+                "projectPath": "D:\\devperimental\\portal-api\\src\\code\\Repository.Billing.Shared\\Repository.Billing.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

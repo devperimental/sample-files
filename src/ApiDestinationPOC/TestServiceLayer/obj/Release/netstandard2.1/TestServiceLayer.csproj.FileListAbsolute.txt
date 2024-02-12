@@ -1,0 +1,15 @@
+D:\devperimental\sample-files\src\ApiDestinationPOC\TestServiceLayer\bin\Release\netstandard2.1\TestServiceLayer.deps.json
+D:\devperimental\sample-files\src\ApiDestinationPOC\TestServiceLayer\bin\Release\netstandard2.1\TestServiceLayer.dll
+D:\devperimental\sample-files\src\ApiDestinationPOC\TestServiceLayer\bin\Release\netstandard2.1\TestServiceLayer.pdb
+D:\devperimental\sample-files\src\ApiDestinationPOC\TestServiceLayer\bin\Release\netstandard2.1\AWSServiceWrapper.Shared.dll
+D:\devperimental\sample-files\src\ApiDestinationPOC\TestServiceLayer\bin\Release\netstandard2.1\TestServiceLayer.Shared.dll
+D:\devperimental\sample-files\src\ApiDestinationPOC\TestServiceLayer\bin\Release\netstandard2.1\AWSServiceWrapper.Shared.pdb
+D:\devperimental\sample-files\src\ApiDestinationPOC\TestServiceLayer\bin\Release\netstandard2.1\TestServiceLayer.Shared.pdb
+D:\devperimental\sample-files\src\ApiDestinationPOC\TestServiceLayer\obj\Release\netstandard2.1\TestServiceLayer.csproj.AssemblyReference.cache
+D:\devperimental\sample-files\src\ApiDestinationPOC\TestServiceLayer\obj\Release\netstandard2.1\TestServiceLayer.GeneratedMSBuildEditorConfig.editorconfig
+D:\devperimental\sample-files\src\ApiDestinationPOC\TestServiceLayer\obj\Release\netstandard2.1\TestServiceLayer.AssemblyInfoInputs.cache
+D:\devperimental\sample-files\src\ApiDestinationPOC\TestServiceLayer\obj\Release\netstandard2.1\TestServiceLayer.AssemblyInfo.cs
+D:\devperimental\sample-files\src\ApiDestinationPOC\TestServiceLayer\obj\Release\netstandard2.1\TestServiceLayer.csproj.CoreCompileInputs.cache
+D:\devperimental\sample-files\src\ApiDestinationPOC\TestServiceLayer\obj\Release\netstandard2.1\TestServiceLayer.csproj.CopyComplete
+D:\devperimental\sample-files\src\ApiDestinationPOC\TestServiceLayer\obj\Release\netstandard2.1\TestServiceLayer.dll
+D:\devperimental\sample-files\src\ApiDestinationPOC\TestServiceLayer\obj\Release\netstandard2.1\TestServiceLayer.pdb

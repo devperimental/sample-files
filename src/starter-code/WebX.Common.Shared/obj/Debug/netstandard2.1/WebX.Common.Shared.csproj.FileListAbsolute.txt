@@ -1,0 +1,15 @@
+D:\devperimental\component-api-libraries\src\code\WebX.Common.Shared\bin\Debug\netstandard2.1\WebX.Common.Shared.deps.json
+D:\devperimental\component-api-libraries\src\code\WebX.Common.Shared\bin\Debug\netstandard2.1\WebX.Common.Shared.dll
+D:\devperimental\component-api-libraries\src\code\WebX.Common.Shared\bin\Debug\netstandard2.1\WebX.Common.Shared.pdb
+D:\devperimental\component-api-libraries\src\code\WebX.Common.Shared\bin\Debug\netstandard2.1\DomainX.Shared.dll
+D:\devperimental\component-api-libraries\src\code\WebX.Common.Shared\bin\Debug\netstandard2.1\PlatformX.ServiceLayer.Common.dll
+D:\devperimental\component-api-libraries\src\code\WebX.Common.Shared\bin\Debug\netstandard2.1\DomainX.Shared.pdb
+D:\devperimental\component-api-libraries\src\code\WebX.Common.Shared\bin\Debug\netstandard2.1\PlatformX.ServiceLayer.Common.pdb
+D:\devperimental\component-api-libraries\src\code\WebX.Common.Shared\obj\Debug\netstandard2.1\WebX.Common.Shared.csproj.AssemblyReference.cache
+D:\devperimental\component-api-libraries\src\code\WebX.Common.Shared\obj\Debug\netstandard2.1\WebX.Common.Shared.GeneratedMSBuildEditorConfig.editorconfig
+D:\devperimental\component-api-libraries\src\code\WebX.Common.Shared\obj\Debug\netstandard2.1\WebX.Common.Shared.AssemblyInfoInputs.cache
+D:\devperimental\component-api-libraries\src\code\WebX.Common.Shared\obj\Debug\netstandard2.1\WebX.Common.Shared.AssemblyInfo.cs
+D:\devperimental\component-api-libraries\src\code\WebX.Common.Shared\obj\Debug\netstandard2.1\WebX.Common.Shared.csproj.CoreCompileInputs.cache
+D:\devperimental\component-api-libraries\src\code\WebX.Common.Shared\obj\Debug\netstandard2.1\WebX.Common.Shared.csproj.CopyComplete
+D:\devperimental\component-api-libraries\src\code\WebX.Common.Shared\obj\Debug\netstandard2.1\WebX.Common.Shared.dll
+D:\devperimental\component-api-libraries\src\code\WebX.Common.Shared\obj\Debug\netstandard2.1\WebX.Common.Shared.pdb

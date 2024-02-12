@@ -1,0 +1,50 @@
+name: Push Package
+description: Build and push package using semantic release
+inputs:
+  nuget-username:
+    description: nuget username
+    required: true
+  src-dir:
+    description: source directory
+    required: true
+  repo-organisation:
+    description: repo organisation name
+    required: true
+  team-pat:
+    description: team pat
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 'lts/*'
+
+    - name: Install NPM dependencies
+      run: npm ci
+      shell: bash
+
+    - name: Setup dotnet
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '7.x'
+
+    - name: Add Github pacakges nuget source
+      run: |
+        dotnet nuget add source --username ${{ inputs.nuget-username}} --password ${{ inputs.team-pat }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/${{inputs.repo-organisation}}/index.json"
+      shell: bash
+
+    - name: Install dependancies
+      run: dotnet restore ${{inputs.src-dir}}
+      shell: bash
+
+    - name: Build solution
+      run: dotnet build ${{inputs.src-dir}} --configuration Release --no-restore
+      shell: bash
+
+    - name: Semantic Release
+      env:
+        GITHUB_TOKEN: ${{ inputs.team-pat}}
+      run: npx semantic-release
+      shell: bash

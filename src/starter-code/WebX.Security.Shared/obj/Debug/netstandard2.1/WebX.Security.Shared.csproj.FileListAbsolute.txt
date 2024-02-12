@@ -1,0 +1,10 @@
+D:\devperimental\component-api-libraries\src\code\WebX.Security.Shared\bin\Debug\netstandard2.1\WebX.Security.Shared.deps.json
+D:\devperimental\component-api-libraries\src\code\WebX.Security.Shared\bin\Debug\netstandard2.1\WebX.Security.Shared.dll
+D:\devperimental\component-api-libraries\src\code\WebX.Security.Shared\bin\Debug\netstandard2.1\WebX.Security.Shared.pdb
+D:\devperimental\component-api-libraries\src\code\WebX.Security.Shared\obj\Debug\netstandard2.1\WebX.Security.Shared.csproj.AssemblyReference.cache
+D:\devperimental\component-api-libraries\src\code\WebX.Security.Shared\obj\Debug\netstandard2.1\WebX.Security.Shared.GeneratedMSBuildEditorConfig.editorconfig
+D:\devperimental\component-api-libraries\src\code\WebX.Security.Shared\obj\Debug\netstandard2.1\WebX.Security.Shared.AssemblyInfoInputs.cache
+D:\devperimental\component-api-libraries\src\code\WebX.Security.Shared\obj\Debug\netstandard2.1\WebX.Security.Shared.AssemblyInfo.cs
+D:\devperimental\component-api-libraries\src\code\WebX.Security.Shared\obj\Debug\netstandard2.1\WebX.Security.Shared.csproj.CoreCompileInputs.cache
+D:\devperimental\component-api-libraries\src\code\WebX.Security.Shared\obj\Debug\netstandard2.1\WebX.Security.Shared.dll
+D:\devperimental\component-api-libraries\src\code\WebX.Security.Shared\obj\Debug\netstandard2.1\WebX.Security.Shared.pdb

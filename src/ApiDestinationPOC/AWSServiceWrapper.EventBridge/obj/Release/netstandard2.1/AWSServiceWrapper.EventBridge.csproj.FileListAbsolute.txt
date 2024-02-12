@@ -1,0 +1,13 @@
+D:\devperimental\sample-files\src\ApiDestinationPOC\AWSServiceWrapper.EventBridge\bin\Release\netstandard2.1\AWSServiceWrapper.EventBridge.deps.json
+D:\devperimental\sample-files\src\ApiDestinationPOC\AWSServiceWrapper.EventBridge\bin\Release\netstandard2.1\AWSServiceWrapper.EventBridge.dll
+D:\devperimental\sample-files\src\ApiDestinationPOC\AWSServiceWrapper.EventBridge\bin\Release\netstandard2.1\AWSServiceWrapper.EventBridge.pdb
+D:\devperimental\sample-files\src\ApiDestinationPOC\AWSServiceWrapper.EventBridge\bin\Release\netstandard2.1\AWSServiceWrapper.Shared.dll
+D:\devperimental\sample-files\src\ApiDestinationPOC\AWSServiceWrapper.EventBridge\bin\Release\netstandard2.1\AWSServiceWrapper.Shared.pdb
+D:\devperimental\sample-files\src\ApiDestinationPOC\AWSServiceWrapper.EventBridge\obj\Release\netstandard2.1\AWSServiceWrapper.EventBridge.csproj.AssemblyReference.cache
+D:\devperimental\sample-files\src\ApiDestinationPOC\AWSServiceWrapper.EventBridge\obj\Release\netstandard2.1\AWSServiceWrapper.EventBridge.GeneratedMSBuildEditorConfig.editorconfig
+D:\devperimental\sample-files\src\ApiDestinationPOC\AWSServiceWrapper.EventBridge\obj\Release\netstandard2.1\AWSServiceWrapper.EventBridge.AssemblyInfoInputs.cache
+D:\devperimental\sample-files\src\ApiDestinationPOC\AWSServiceWrapper.EventBridge\obj\Release\netstandard2.1\AWSServiceWrapper.EventBridge.AssemblyInfo.cs
+D:\devperimental\sample-files\src\ApiDestinationPOC\AWSServiceWrapper.EventBridge\obj\Release\netstandard2.1\AWSServiceWrapper.EventBridge.csproj.CoreCompileInputs.cache
+D:\devperimental\sample-files\src\ApiDestinationPOC\AWSServiceWrapper.EventBridge\obj\Release\netstandard2.1\AWSServiceWrapper.EventBridge.csproj.CopyComplete
+D:\devperimental\sample-files\src\ApiDestinationPOC\AWSServiceWrapper.EventBridge\obj\Release\netstandard2.1\AWSServiceWrapper.EventBridge.dll
+D:\devperimental\sample-files\src\ApiDestinationPOC\AWSServiceWrapper.EventBridge\obj\Release\netstandard2.1\AWSServiceWrapper.EventBridge.pdb

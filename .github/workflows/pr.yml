@@ -3,19 +3,15 @@ on:
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
 env:
-  nuget-username: chrisxpr
-  src-dir: ./src/code
+  src-dir: ./src/code/ApiDestinationPOC
   cdk-dir: ./cdk
   coverage-threshold: 0
-  repo-organisation: architected
-  team-pat: ${{ secrets.NUGET_PAT}}
+  fail-below-coverage-threshold: false
   cdk_action: deploy
-  aws_secret: ${{ secrets.AWS_SECRET}}
-  aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID}}
-  aws_region: ap-southeast-2
-  service_key: portal-api
-  #ecr_repository_name: portal-api
-  target_environment: x-${{ github.event.number}}
+#  aws_secret: ${{ secrets.AWS_SECRET}}
+#  aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID}}
+#  aws_region: ap-southeast-2
+  target_environment: dev
   aspnet_environment: Development
   run_number: ${{ github.run_number}}
 
@@ -32,54 +28,72 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: buildAndTest
-        uses: devperimental/composite-action-library/dotnet-build-and-test@v2
+      - name: Setup dotnet 
+        uses: actions/setup-dotnet@v3
         with:
-          nuget-username: ${{ env.nuget-username }}
-          src-dir: ${{ env.src-dir }}
-          coverage-threshold: ${{ env.coverage-threshold }}
-          repo-organisation: ${{ env.repo-organisation }}
-          team-pat: ${{ env.team-pat }}
+          dotnet-version: '6.x'
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
+  #      - name: Add Github pacakges nuget source
+  #      run: |
+  #        dotnet nuget add source --username ${{ inputs.nuget-username}} --password ${{ inputs.team-pat }} --store-password-in-clear-text --name github 'https://nuget.pkg.github.com/${{inputs.repo-organisation}}/index.json'
+  #      shell: bash
+
+      - name: Install dependancies
+        run: dotnet restore ${{env.src-dir}}
+
+      - name: Build solution
+        run: dotnet build ${{env.src-dir}} --configuration Release --no-restore
+
+      - name: Install dotnet report generator tool
+        run: dotnet tool install --global dotnet-reportgenerator-globaltool
+
+      - name: Run unit tests
+        run: dotnet test ${{env.src-dir}} --filter FullyQualifiedName~Tests --configuration Release --verbosity quiet --collect:"XPlat Code Coverage" --results-directory ./coverage /p:CollectCoverage=true
+
+      - name: Merge Coverage Reports
+        run: reportgenerator -reports:./coverage/**/coverage.cobertura.xml -targetdir:./coverage -reporttypes:Cobertura
+
+      - name: Code Coverage Report
+        uses: irongut/CodeCoverageSummary@v1.3.0
         with:
-          aws-access-key-id: ${{ env.aws_access_key_id }}
-          aws-secret-access-key: ${{ env.aws_secret }}
-          aws-region: ${{ env.aws_region }}
+          filename: ./coverage/**/coverage.cobertura.xml
+          badge: true
+          fail_below_min: '${{env.fail-below-coverage-threshold}}'
+          format: markdown
+          hide_branch_rate: false
+          hide_complexity: false
+          indicators: true
+          output: both
+          thresholds: '${{env.coverage-threshold}}'
 
-      #- name: Login to Amazon ECR
-      #  id: login-ecr
-      #  uses: aws-actions/amazon-ecr-login@v1
+      - name: Add Coverage PR Comment
+        uses: marocchino/sticky-pull-request-comment@v2
+        if: ${{ github.event_name == 'pull_request' }}
+        with:
+          recreate: true
+          path: code-coverage-results.md
+#      - name: Configure AWS credentials
+#        uses: aws-actions/configure-aws-credentials@v1
+#        with:
+#          aws-access-key-id: ${{ env.aws_access_key_id }}
+#          aws-secret-access-key: ${{ env.aws_secret }}
+#          aws-region: ${{ env.aws_region }}
 
-      #- name: Build, tag, and push the image to Amazon ECR
-      #  id: build-image
-      #  env:
-      #    ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-      #    ECR_REPOSITORY: ${{ env.ecr_repository_name }}
-      #    IMAGE_TAG: ${{ env.target_environment}}
-      #    SRC_DIR: ${{ env.src-dir }}
-      #  run: |
-      #    cd $SRC_DIR
-      #    docker build --build-arg NUGET_USERNAME=${{ env.nuget-username }} --build-arg NUGET_PAT=${{ env.team-pat }} --build-arg NUGET_ORGANISATION=${{ env.repo-organisation }} -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-      #    docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-      #    echo "name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+#      - name: install npm
+#        run: 'sudo apt update -y && sudo apt install nodejs npm -y'
 
-      - name: install npm
-        run: 'sudo apt update -y && sudo apt install nodejs npm -y'
+#      - name: Install AWS CDK and dependencies
+#        env:
+#          CDK_DIR: ${{ env.cdk-dir }}
+#        run: |
+#          sudo npm install -g aws-cdk
+#          cd $CDK_DIR
+#          sudo npm install
 
-      - name: Install AWS CDK and dependencies
-        env:
-          CDK_DIR: ${{ env.cdk-dir }}
-        run: |
-          sudo npm install -g aws-cdk
-          cd $CDK_DIR
-          sudo npm install
+#      - name: CDK Synth
+#        run: cdk synth
+#        working-directory: ${{ env.cdk-dir }}
 
-      - name: CDK Synth
-        run: cdk synth
-        working-directory: ${{ env.cdk-dir }}
-
-      - name: CDK Deploy
-        run: cdk deploy --require-approval never
-        working-directory: ${{ env.cdk-dir }}
+#      - name: CDK Deploy
+#        run: cdk deploy --require-approval never
+#        working-directory: ${{ env.cdk-dir }}

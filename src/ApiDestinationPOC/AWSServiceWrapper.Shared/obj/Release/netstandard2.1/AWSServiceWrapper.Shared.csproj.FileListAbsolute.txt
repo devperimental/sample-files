@@ -1,0 +1,9 @@
+D:\devperimental\sample-files\src\ApiDestinationPOC\AWSServiceWrapper.Shared\bin\Release\netstandard2.1\AWSServiceWrapper.Shared.deps.json
+D:\devperimental\sample-files\src\ApiDestinationPOC\AWSServiceWrapper.Shared\bin\Release\netstandard2.1\AWSServiceWrapper.Shared.dll
+D:\devperimental\sample-files\src\ApiDestinationPOC\AWSServiceWrapper.Shared\bin\Release\netstandard2.1\AWSServiceWrapper.Shared.pdb
+D:\devperimental\sample-files\src\ApiDestinationPOC\AWSServiceWrapper.Shared\obj\Release\netstandard2.1\AWSServiceWrapper.Shared.GeneratedMSBuildEditorConfig.editorconfig
+D:\devperimental\sample-files\src\ApiDestinationPOC\AWSServiceWrapper.Shared\obj\Release\netstandard2.1\AWSServiceWrapper.Shared.AssemblyInfoInputs.cache
+D:\devperimental\sample-files\src\ApiDestinationPOC\AWSServiceWrapper.Shared\obj\Release\netstandard2.1\AWSServiceWrapper.Shared.AssemblyInfo.cs
+D:\devperimental\sample-files\src\ApiDestinationPOC\AWSServiceWrapper.Shared\obj\Release\netstandard2.1\AWSServiceWrapper.Shared.csproj.CoreCompileInputs.cache
+D:\devperimental\sample-files\src\ApiDestinationPOC\AWSServiceWrapper.Shared\obj\Release\netstandard2.1\AWSServiceWrapper.Shared.dll
+D:\devperimental\sample-files\src\ApiDestinationPOC\AWSServiceWrapper.Shared\obj\Release\netstandard2.1\AWSServiceWrapper.Shared.pdb

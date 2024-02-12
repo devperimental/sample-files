@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "FYphWSnsqmuXKD9Ko20cpjY/9Op53Yc5jjGESeOvnWE=",
+  "Source": "ExternalApi",
+  "BasePath": "_content/ExternalApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
