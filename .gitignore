@@ -6,4 +6,10 @@
 /src/code/.vs/Sample
 /src/code/**/bin
 /src/code/**/obj
-/src/code/.vs/ProjectEvaluation
+/src/ApiDestinationPOC/**/obj
+/src/ApiDestinationPOC/**/bin
+/src/ApiDestinationPOC/.vs
+/src/starter-code/**/obj
+/src/starter-code/**/bin
+/src/starter-code/.vs
+/src/**/.vs
