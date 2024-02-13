@@ -23,7 +23,7 @@ namespace TestServiceLayer.Tests
 
             eventBridgeWrapperMock.Setup(c => c.PutCustomEvent(It.IsAny<EventBusEntry>())).ReturnsAsync(true);
 
-            var eventRuleDetail = new EventRuleDetail { ID = Guid.NewGuid().ToString() };
+            var eventRuleDetail = new EventRuleDetail { RequestId = Guid.NewGuid().ToString() };
             await testService.HandleEventRule(eventRuleDetail);
 
             eventBridgeWrapperMock.Verify(c=> c.PutCustomEvent(It.IsAny<EventBusEntry>()));

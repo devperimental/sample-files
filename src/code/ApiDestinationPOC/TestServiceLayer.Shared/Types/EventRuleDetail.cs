@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TestServiceLayer.Shared.Types
+﻿namespace TestServiceLayer.Shared.Types
 {
     public class EventRuleDetail
     {
-        public string? ID { get; set; }
+        public string? RequestId { get; set; }
+        public string? IdempotencyKey { get; set; }
+        public string? PartnerName { get; set; }
     }
 }

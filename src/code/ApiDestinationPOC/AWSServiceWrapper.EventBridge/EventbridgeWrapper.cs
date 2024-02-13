@@ -44,6 +44,7 @@ namespace AWSServiceWrapper.EventBridge
                         {
                             Source = eventBusEntry.Source,
                             Detail = eventBusEntry.Detail,
+                            EventBusName = eventBusEntry.EventBusName,
                             DetailType = eventBusEntry.DetailType
                         }
                     }

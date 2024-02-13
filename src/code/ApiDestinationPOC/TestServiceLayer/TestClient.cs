@@ -32,9 +32,9 @@ namespace TestServiceLayer
 
             var messageAttributes = new Dictionary<string, WrapperMessageAttributeValue>
             {
-                { "ID",   new WrapperMessageAttributeValue { DataType = "String", StringValue = eventRuleDetail.ID } },
-                { "IdempotencyKey",  new WrapperMessageAttributeValue { DataType = "String", StringValue = Guid.NewGuid().ToString() } },
-                { "SessionID", new WrapperMessageAttributeValue { DataType = "String", StringValue = Guid.NewGuid().ToString() } },
+                { "RequestId",   new WrapperMessageAttributeValue { DataType = "String", StringValue = eventRuleDetail.RequestId } },
+                { "IdempotencyKey",  new WrapperMessageAttributeValue { DataType = "String", StringValue = eventRuleDetail.IdempotencyKey } },
+                { "PartnerName", new WrapperMessageAttributeValue { DataType = "String", StringValue = eventRuleDetail.PartnerName } },
             };
 
             if (string.IsNullOrEmpty(_eventRuleSettings.EventRuleQUrl))
@@ -48,6 +48,8 @@ namespace TestServiceLayer
             {
                 _logger.LogWarning("Unable to submit queue event for {@eventRuleDetail}", eventRuleDetail);
             }
+
+            _logger.LogInformation("Message submitted with {Id}", messageId);
         }
     }
 }

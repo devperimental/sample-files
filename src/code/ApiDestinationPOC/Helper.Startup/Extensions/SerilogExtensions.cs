@@ -6,7 +6,7 @@ using Serilog.Core;
 using Serilog.Events;
 using Serilog.Formatting.Json;
 
-namespace PlatformX.Startup.Extensions
+namespace Helper.Startup.Extensions
 {
     public static class SerilogExtensions
     {

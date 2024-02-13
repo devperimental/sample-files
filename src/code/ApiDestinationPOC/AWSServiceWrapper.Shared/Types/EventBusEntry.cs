@@ -6,6 +6,7 @@ namespace AWSServiceWrapper.Shared.Types
     {
         public string? Source { get; set; }
         public string? Detail { get; set; }
+        public string? EventBusName { get; set; }
         public string? DetailType { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using PlatformX.Common.Types.DataContract;
+using Helper.Startup.Types;
 
-namespace PlatformX.Startup.Extensions
+namespace Helper.Startup.Extensions
 {
     public static class ConfigurationExtensions
     {
@@ -12,7 +12,6 @@ namespace PlatformX.Startup.Extensions
                 EnvironmentName = Environment.GetEnvironmentVariable("ENVIRONMENT_NAME"),
                 AspNetCoreEnvironmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"),
                 ServiceName = Environment.GetEnvironmentVariable("SERVICE_NAME"),
-                SsmPrefix = Environment.GetEnvironmentVariable("SSM_PREFIX"),
                 CorsOrigins = Environment.GetEnvironmentVariable("CORS_ORIGINS"),
                 AddHealthCheck = Environment.GetEnvironmentVariable("ADD_HEALTHCHECK") == "true",
             };

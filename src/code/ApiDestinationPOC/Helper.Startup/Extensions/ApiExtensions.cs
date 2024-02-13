@@ -1,14 +1,13 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Helper.Startup.Types;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using PlatformX.Common.Constants;
-using PlatformX.Common.Types.DataContract;
 using System.Reflection;
 
-namespace PlatformX.Startup.Extensions
+namespace Helper.Startup.Extensions
 {
     public static class ApiExtensions
     {
@@ -41,16 +40,10 @@ namespace PlatformX.Startup.Extensions
         /// <param name="configuration"></param>
         /// <param name="bootstrapConfiguration"></param>
         public static void AddLambdaService(this IServiceCollection services,
-            IConfiguration configuration,
             BootstrapConfiguration bootstrapConfiguration)
         {
-            services.AddOpenApiInfo(configuration);
-
-            var scope = services.BuildServiceProvider();
-            var openApiInfo = scope.GetRequiredService<OpenApiInfo>();
-
             services.AddSerilog();
-            services.AddApiServiceCore(openApiInfo, bootstrapConfiguration);
+            services.AddLambdaServiceCore(bootstrapConfiguration);
         }
 
         public static void AddOpenApiInfo(this IServiceCollection services, IConfiguration configuration)
@@ -111,6 +104,32 @@ namespace PlatformX.Startup.Extensions
             {
                 services.AddHealthChecks();
             }
+        }
+
+        public static void AddLambdaServiceCore(this IServiceCollection services,
+            BootstrapConfiguration bootstrapConfiguration)
+        {
+            if (!string.IsNullOrEmpty(bootstrapConfiguration.CorsOrigins))
+            {
+                services.AddCors(options =>
+                {
+                    options.AddDefaultPolicy(
+                        builder =>
+                        {
+                            builder
+                                .SetIsOriginAllowedToAllowWildcardSubdomains()
+                                .WithOrigins(bootstrapConfiguration.CorsOrigins.Split(','))
+                                .AllowAnyMethod()
+                                .AllowAnyHeader()
+                                .AllowCredentials();
+                        });
+                });
+            }
+
+            services.Configure<ForwardedHeadersOptions>(options =>
+            {
+                options.ForwardedHeaders = ForwardedHeaders.All;
+            });
         }
     }
 }

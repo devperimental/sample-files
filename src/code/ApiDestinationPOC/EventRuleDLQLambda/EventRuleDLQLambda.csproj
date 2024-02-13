@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -11,13 +11,31 @@
     <PublishReadyToRun>true</PublishReadyToRun>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="appsettings.Development.json" />
+    <None Remove="appsettings.json" />
+    <None Remove="appsettings.Local.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="appsettings.Development.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="appsettings.Local.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Amazon.Lambda.Core" Version="2.2.0" />
     <PackageReference Include="Amazon.Lambda.Serialization.SystemTextJson" Version="2.4.0" />
     <PackageReference Include="Amazon.Lambda.SQSEvents" Version="2.2.0" />
 	<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.1" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\TestServiceLayer.Shared\TestServiceLayer.Shared.csproj" />
-    <ProjectReference Include="..\TestServiceLayer\TestServiceLayer.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\AWSServiceWrapper.EventBridge\AWSServiceWrapper.EventBridge.csproj" />
+		<ProjectReference Include="..\Helper.Startup\Helper.Startup.csproj" />
+		<ProjectReference Include="..\TestServiceLayer.Shared\TestServiceLayer.Shared.csproj" />
+		<ProjectReference Include="..\TestServiceLayer\TestServiceLayer.csproj" />
+	</ItemGroup>
 </Project>

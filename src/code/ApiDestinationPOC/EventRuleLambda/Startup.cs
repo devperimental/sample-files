@@ -1,6 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using TestServiceLayer;
-using TestServiceLayer.Shared.Behaviours;
+﻿using EventRuleLambda.Extensions;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace EventRuleLambda
 {
@@ -10,7 +9,7 @@ namespace EventRuleLambda
         public static void ConfigureServices()
         {
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddSingleton<ITestService, TestService>();
+            serviceCollection.AddTestService();
 
             Services = serviceCollection.BuildServiceProvider(); 
         }

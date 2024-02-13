@@ -2,8 +2,17 @@ using ExternalApi.Filters;
 using System.Diagnostics.CodeAnalysis;
 using TestServiceLayer;
 using TestServiceLayer.Shared.Behaviours;
+using Helper.Startup.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Load bootstrapConfiguration
+var bootstrapConfiguration = builder.Services.AddBootstrapConfiguration();
+
+builder.Services.AddDefaultAWSOptions(builder.Configuration.GetAWSOptions());
+
+// Configure the container dependancies
+builder.Services.AddWebApiService(builder.Configuration, builder.Logging, bootstrapConfiguration);
 
 builder.Services.AddScoped<HandleExceptionAttribute>();
 builder.Services.AddTransient<ITestCallback, TestCallback>();
