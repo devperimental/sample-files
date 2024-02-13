@@ -25,11 +25,10 @@ export class EventRuleConstruct extends Construct {
     });
 
     // Define ApiDefinition
-    const webhookUrl = props.webhookUrl + 'notify/partner/testPartner'; // retrieve from parameter store ?? or props
     const apiDestinationName = `${props?.resourcePrefix}ApiConnection${props?.target_environment}`;
     const apiDestination = new ApiDestination(this, apiDestinationName, {
       connection: conn,
-      endpoint: webhookUrl,
+      endpoint: props.webhookUrl,
       rateLimitPerSecond: 1,
       apiDestinationName: apiDestinationName,
     });

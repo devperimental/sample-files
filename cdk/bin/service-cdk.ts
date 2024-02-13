@@ -27,6 +27,7 @@ const stackSettings: IStackSettings = {
       lambdaTimeoutSeconds: 30,
       createFunctionUrl: true,
       serviceDirectory: src_dir,
+      lambdaSettings: {},
     },
     {
       targetEnvironment: target_environment,
@@ -37,6 +38,7 @@ const stackSettings: IStackSettings = {
       isQueueTrigger: true,
       lambdaTimeoutSeconds: 30,
       serviceDirectory: src_dir,
+      lambdaSettings: {},
     },
     {
       targetEnvironment: target_environment,
@@ -48,6 +50,7 @@ const stackSettings: IStackSettings = {
       createFunctionUrl: true,
       lambdaTimeoutSeconds: 30,
       serviceDirectory: src_dir,
+      lambdaSettings: {},
     },
   ],
   environmentName: target_environment,

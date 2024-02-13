@@ -20,13 +20,14 @@ export interface ILambdaSettings extends cdk.StackProps {
   lambdaTimeoutSeconds: number;
   createFunctionUrl?: boolean;
   serviceDirectory: string;
+  lambdaSettings: any;
 }
 
 export interface IEventRuleSettings extends cdk.StackProps {
   dlq?: Queue;
   eventBus: EventBus;
-  webhookUrl?: string;
+  webhookUrl: string;
   resourcePrefix: string;
   target_environment: string;
-  account: cdk.Stack["account"];
+  account: cdk.Stack['account'];
 }

@@ -34,6 +34,11 @@ namespace EventRuleLambda.Extensions
             {
                 var config = new EventRuleSettings { };
                 configuration.GetSection(nameof(EventRuleSettings)).Bind(config);
+                var eventBusName = Environment.GetEnvironmentVariable("EVENT_BUS_NAME");
+                if (!string.IsNullOrEmpty(eventBusName))
+                {
+                    config.EventBusName = eventBusName;
+                }
                 
                 return config;
             });

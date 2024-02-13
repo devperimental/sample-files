@@ -12,13 +12,24 @@ export class PocCdkStack extends cdk.Stack {
 
     const outerConstruct = this;
 
-    // Event Rule Lambda
-    //////////////////////////
+    // 1 EventBus Creation - To receive put events from source
+    const busName = `${props?.resourcePrefix}EventBus${props?.environmentName}`;
+    const bus = new EventBus(this, busName);
+
+    // 2 Event Rule Lambda Creation - To send put events to the event bus
+    const eventBusName = bus.eventBusName;
+    const eventRuleLambdaEnvironmentVariables = {
+      EVENT_BUS_NAME: eventBusName,
+    };
+
     const eventRuleLambdaSettings = props.lambdaProjects.filter(function (
       item
     ) {
       return item['lambdaProjectName'] == 'EventRuleLambda';
     });
+
+    eventRuleLambdaSettings[0].lambdaSettings =
+      eventRuleLambdaEnvironmentVariables;
 
     const eventRuleLambdaConstruct = new LambdaFunctionConstruct(
       outerConstruct,
@@ -26,53 +37,20 @@ export class PocCdkStack extends cdk.Stack {
       eventRuleLambdaSettings[0]
     );
 
-    eventRuleLambdaConstruct.lambdaFunction.addToRolePolicy(
-      new iam.PolicyStatement({
-        effect: iam.Effect.ALLOW,
-        actions: [
-          'logs:DescribeLogGroups',
-          'logs:StartQuery',
-          'logs:GetQueryResults',
-          'logs:GetLogEvents',
-          'logs:CreateLogStream',
-        ],
-        resources: ['*'],
-      })
-    );
-
-    // Event Rule DLQ Lambda
-    //////////////////////////
+    // 3 Event Rule DLQ Lambda Creation - To receive failed attempts to reach the api destination
     const eventRuleDLQLambdaSettings = props.lambdaProjects.filter(function (
       item
     ) {
       return item['lambdaProjectName'] == 'EventRuleDLQLambda';
     });
+
     const eventRuleDLQLambdaConstruct = new LambdaFunctionConstruct(
       outerConstruct,
       `${eventRuleDLQLambdaSettings[0].lambdaProjectName}Lambda`,
       eventRuleDLQLambdaSettings[0]
     );
 
-    eventRuleDLQLambdaConstruct.lambdaFunction.addToRolePolicy(
-      new iam.PolicyStatement({
-        effect: iam.Effect.ALLOW,
-        actions: [
-          'logs:DescribeLogGroups',
-          'logs:StartQuery',
-          'logs:GetQueryResults',
-          'logs:GetLogEvents',
-          'logs:CreateLogStream',
-        ],
-        resources: ['*'],
-      })
-    );
-
-    // Define EventBus
-    const busName = `${props?.resourcePrefix}EventBus${props?.environmentName}`;
-    const bus = new EventBus(this, busName);
-
-    // External API Lambda
-    //////////////////////////
+    // 4 External API Lambda Creation - To simulate an external api url for the Api Destination connection
     const externalAPILambdaSettings = props.lambdaProjects.filter(function (
       item
     ) {
@@ -84,25 +62,14 @@ export class PocCdkStack extends cdk.Stack {
       externalAPILambdaSettings[0]
     );
 
-    externalAPILambdaConstruct.lambdaFunction.addToRolePolicy(
-      new iam.PolicyStatement({
-        effect: iam.Effect.ALLOW,
-        actions: [
-          'logs:DescribeLogGroups',
-          'logs:StartQuery',
-          'logs:GetQueryResults',
-          'logs:GetLogEvents',
-          'logs:CreateLogStream',
-        ],
-        resources: ['*'],
-      })
-    );
+    // 5 Event Rule Creation - Event bridge event rule to connect to event bus and api destination
+    const webhookUrl =
+      externalAPILambdaConstruct.functionUrl + 'notify/partner/testPartner'; // retrieve from parameter store ?? or props
 
-    // need this for IEventRuleSettings
     const eventRuleSettings: IEventRuleSettings = {
       dlq: eventRuleDLQLambdaConstruct.primaryQueue,
       eventBus: bus,
-      webhookUrl: externalAPILambdaConstruct.functionUrl,
+      webhookUrl: webhookUrl,
       resourcePrefix: props.resourcePrefix,
       target_environment: props.environmentName,
       account: this.account,

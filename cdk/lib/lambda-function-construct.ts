@@ -9,6 +9,7 @@ import * as path from 'path';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import { Queue } from 'aws-cdk-lib/aws-sqs';
 import { ILambdaSettings } from './service-types';
+import * as iam from 'aws-cdk-lib/aws-iam';
 
 export class LambdaFunctionConstruct extends Construct {
   public readonly lambdaFunction: lambda.Function;
@@ -58,6 +59,17 @@ export class LambdaFunctionConstruct extends Construct {
       ? props.lambdaProjectName
       : `${props.lambdaProjectName}::${props.lambdaProjectName}.Function::FunctionHandler`;
 
+    const defaultSettings = {
+      ENVIRONMENT_NAME: `${localEnvironment}`,
+      ASPNETCORE_ENVIRONMENT: `${props.aspNetCoreEnvironment}`,
+      SERVICE_NAME: `${props.lambdaProjectName}`,
+      LAYER: 'service',
+      HOST_ENVIRONMENT_TYPE: 'LAMBDA',
+      APPLICATION_NAME: `${props.lambdaProjectName}`,
+    };
+
+    const lambdaSettings = { ...defaultSettings, ...props.lambdaSettings };
+
     this.lambdaFunction = new lambda.Function(this, `${functionName}-lambda`, {
       functionName,
       runtime: new Runtime('dotnet6', RuntimeFamily.DOTNET_CORE),
@@ -68,14 +80,7 @@ export class LambdaFunctionConstruct extends Construct {
       timeout: cdk.Duration.seconds(props.lambdaTimeoutSeconds),
       tracing: lambda.Tracing.ACTIVE,
       logRetention: logs.RetentionDays.TWO_WEEKS,
-      environment: {
-        ENVIRONMENT_NAME: `${localEnvironment}`,
-        ASPNETCORE_ENVIRONMENT: `${props.aspNetCoreEnvironment}`,
-        SERVICE_NAME: `${props.lambdaProjectName}`,
-        LAYER: 'service',
-        HOST_ENVIRONMENT_TYPE: 'LAMBDA',
-        APPLICATION_NAME: `${props.lambdaProjectName}`,
-      },
+      environment: lambdaSettings,
       securityGroups: [egressSg, vpeSg],
       vpc: vpc,
     });
@@ -118,5 +123,19 @@ export class LambdaFunctionConstruct extends Construct {
       );
       this.lambdaFunction.addEventSource(eventSource);
     }
+
+    this.lambdaFunction.addToRolePolicy(
+      new iam.PolicyStatement({
+        effect: iam.Effect.ALLOW,
+        actions: [
+          'logs:DescribeLogGroups',
+          'logs:StartQuery',
+          'logs:GetQueryResults',
+          'logs:GetLogEvents',
+          'logs:CreateLogStream',
+        ],
+        resources: ['*'],
+      })
+    );
   }
 }
