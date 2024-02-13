@@ -1,72 +1,117 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-import { ApiDestination, Authorization, Connection,Rule,EventBus } from 'aws-cdk-lib/aws-events';
-import { Queue } from 'aws-cdk-lib/aws-sqs';
-import * as targets from 'aws-cdk-lib/aws-events-targets';
-// import * as sqs from 'aws-cdk-lib/aws-sqs';
+import { IStackSettings, IEventRuleSettings } from './service-types';
+import { LambdaFunctionConstruct } from './lambda-function-construct';
+import * as iam from 'aws-cdk-lib/aws-iam';
+import { EventBus } from 'aws-cdk-lib/aws-events';
+import { EventRuleConstruct } from './event-rule-construct';
 
-export interface PolicyStackProps extends cdk.StackProps
-{
-  environmentName: string;
-  resourcePrefix: string;
-};
-
-export class CdkStack extends cdk.Stack {
-  constructor(scope: Construct, id: string, props?: PolicyStackProps) {
+export class PocCdkStack extends cdk.Stack {
+  constructor(scope: Construct, id: string, props: IStackSettings) {
     super(scope, id, props);
 
-    // Define Queues
-    const policyCreatedQName = `${props?.resourcePrefix}Q${props?.environmentName}`
-    const policyCreatedQ = new Queue(this, policyCreatedQName)
+    const outerConstruct = this;
 
-    const dlqName = `${props?.resourcePrefix}DLQ${props?.environmentName}`
-    const dlq = new Queue(this, dlqName)
-    
+    // Event Rule Lambda
+    //////////////////////////
+    const eventRuleLambdaSettings = props.lambdaProjects.filter(function (
+      item
+    ) {
+      return item['lambdaProjectName'] == 'EventRuleLambda';
+    });
+
+    const eventRuleLambdaConstruct = new LambdaFunctionConstruct(
+      outerConstruct,
+      `${eventRuleLambdaSettings[0].lambdaProjectName}Lambda`,
+      eventRuleLambdaSettings[0]
+    );
+
+    eventRuleLambdaConstruct.lambdaFunction.addToRolePolicy(
+      new iam.PolicyStatement({
+        effect: iam.Effect.ALLOW,
+        actions: [
+          'logs:DescribeLogGroups',
+          'logs:StartQuery',
+          'logs:GetQueryResults',
+          'logs:GetLogEvents',
+          'logs:CreateLogStream',
+        ],
+        resources: ['*'],
+      })
+    );
+
+    // Event Rule DLQ Lambda
+    //////////////////////////
+    const eventRuleDLQLambdaSettings = props.lambdaProjects.filter(function (
+      item
+    ) {
+      return item['lambdaProjectName'] == 'EventRuleDLQLambda';
+    });
+    const eventRuleDLQLambdaConstruct = new LambdaFunctionConstruct(
+      outerConstruct,
+      `${eventRuleDLQLambdaSettings[0].lambdaProjectName}Lambda`,
+      eventRuleDLQLambdaSettings[0]
+    );
+
+    eventRuleDLQLambdaConstruct.lambdaFunction.addToRolePolicy(
+      new iam.PolicyStatement({
+        effect: iam.Effect.ALLOW,
+        actions: [
+          'logs:DescribeLogGroups',
+          'logs:StartQuery',
+          'logs:GetQueryResults',
+          'logs:GetLogEvents',
+          'logs:CreateLogStream',
+        ],
+        resources: ['*'],
+      })
+    );
+
     // Define EventBus
-    const busName = `${props?.resourcePrefix}EventBus${props?.environmentName}`
-    const bus = new EventBus(this, busName)
+    const busName = `${props?.resourcePrefix}EventBus${props?.environmentName}`;
+    const bus = new EventBus(this, busName);
 
-    // Define ApiDefinition
-    
-    // dummy value here because target has no auth but connection requires this parameter
-    // ignore or replace with a secure password/token if needed
-    const apisecret = cdk.SecretValue.unsafePlainText("notused")
+    // External API Lambda
+    //////////////////////////
+    const externalAPILambdaSettings = props.lambdaProjects.filter(function (
+      item
+    ) {
+      return item['lambdaProjectName'] == 'ExternalApi';
+    });
+    const externalAPILambdaConstruct = new LambdaFunctionConstruct(
+      outerConstruct,
+      `${externalAPILambdaSettings[0].lambdaProjectName}Lambda`,
+      externalAPILambdaSettings[0]
+    );
 
-    const connectionName = `${props?.resourcePrefix}Connection${props?.environmentName}`
-    const conn = new Connection(this, connectionName, {
-        authorization: Authorization.apiKey("notused", apisecret)
-      }
-    )
+    externalAPILambdaConstruct.lambdaFunction.addToRolePolicy(
+      new iam.PolicyStatement({
+        effect: iam.Effect.ALLOW,
+        actions: [
+          'logs:DescribeLogGroups',
+          'logs:StartQuery',
+          'logs:GetQueryResults',
+          'logs:GetLogEvents',
+          'logs:CreateLogStream',
+        ],
+        resources: ['*'],
+      })
+    );
 
-    const webhookUrl = '<INSERT_VALUE>' // retrieve from parameter store ?? or props
-
-    const apiDestinationName = `${props?.resourcePrefix}ApiConnection${props?.environmentName}`
-    const apiDestination = new ApiDestination(this, apiDestinationName,
-      {
-        connection: conn,
-        endpoint: webhookUrl,
-        rateLimitPerSecond: 1,
-      }
-    )
-
-    // Define EventRule
-    const target = new targets.ApiDestination(apiDestination, {
-      deadLetterQueue: dlq,
-      retryAttempts: 3,
-      headerParameters: {
-        // https://datatracker.ietf.org/doc/draft-ietf-httpapi-idempotency-key-header/
-        'Idempotency-Key': '$.detail.customID' // replace with desired field from your event
-      }
-    })
-
-    const rule = new Rule(this, 'rule', {
+    // need this for IEventRuleSettings
+    const eventRuleSettings: IEventRuleSettings = {
+      dlq: eventRuleDLQLambdaConstruct.primaryQueue,
       eventBus: bus,
-      targets: [target]
-    })
+      webhookUrl: externalAPILambdaConstruct.functionUrl,
+      resourcePrefix: props.resourcePrefix,
+      target_environment: props.environmentName,
+      account: this.account,
+    };
 
-    new cdk.CfnOutput(this, 'busArn', { value: bus.eventBusArn })
-    new cdk.CfnOutput(this, 'ruleArn', { value: rule.ruleArn })
-    new cdk.CfnOutput(this, 'dlqArn', { value: dlq.queueArn })
-    new cdk.CfnOutput(this, 'apiDestinationArn', { value: apiDestination.apiDestinationArn })
+    const eventRule = new EventRuleConstruct(
+      outerConstruct,
+      `${props.resourcePrefix}`,
+      eventRuleSettings
+    );
   }
 }

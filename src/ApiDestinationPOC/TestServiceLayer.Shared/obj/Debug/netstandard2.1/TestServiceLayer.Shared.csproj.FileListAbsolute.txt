@@ -1,9 +1,0 @@
-D:\devperimental\sample-files\src\ApiDestinationPOC\TestServiceLayer.Shared\bin\Debug\netstandard2.1\TestServiceLayer.Shared.deps.json
-D:\devperimental\sample-files\src\ApiDestinationPOC\TestServiceLayer.Shared\bin\Debug\netstandard2.1\TestServiceLayer.Shared.dll
-D:\devperimental\sample-files\src\ApiDestinationPOC\TestServiceLayer.Shared\bin\Debug\netstandard2.1\TestServiceLayer.Shared.pdb
-D:\devperimental\sample-files\src\ApiDestinationPOC\TestServiceLayer.Shared\obj\Debug\netstandard2.1\TestServiceLayer.Shared.GeneratedMSBuildEditorConfig.editorconfig
-D:\devperimental\sample-files\src\ApiDestinationPOC\TestServiceLayer.Shared\obj\Debug\netstandard2.1\TestServiceLayer.Shared.AssemblyInfoInputs.cache
-D:\devperimental\sample-files\src\ApiDestinationPOC\TestServiceLayer.Shared\obj\Debug\netstandard2.1\TestServiceLayer.Shared.AssemblyInfo.cs
-D:\devperimental\sample-files\src\ApiDestinationPOC\TestServiceLayer.Shared\obj\Debug\netstandard2.1\TestServiceLayer.Shared.csproj.CoreCompileInputs.cache
-D:\devperimental\sample-files\src\ApiDestinationPOC\TestServiceLayer.Shared\obj\Debug\netstandard2.1\TestServiceLayer.Shared.dll
-D:\devperimental\sample-files\src\ApiDestinationPOC\TestServiceLayer.Shared\obj\Debug\netstandard2.1\TestServiceLayer.Shared.pdb

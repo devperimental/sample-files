@@ -1,6 +1,0 @@
-D:\devperimental\component-api-libraries\src\code\WebX.Common.Filters\obj\Debug\net6.0\WebX.Common.Filters.csproj.AssemblyReference.cache
-D:\devperimental\component-api-libraries\src\code\WebX.Common.Filters\obj\Debug\net6.0\WebX.Common.Filters.GeneratedMSBuildEditorConfig.editorconfig
-D:\devperimental\component-api-libraries\src\code\WebX.Common.Filters\obj\Debug\net6.0\WebX.Common.Filters.AssemblyInfoInputs.cache
-D:\devperimental\component-api-libraries\src\code\WebX.Common.Filters\obj\Debug\net6.0\WebX.Common.Filters.AssemblyInfo.cs
-D:\devperimental\component-api-libraries\src\code\WebX.Common.Filters\obj\Debug\net6.0\WebX.Common.Filters.csproj.CoreCompileInputs.cache
-D:\devperimental\component-api-libraries\src\code\WebX.Common.Filters\obj\Debug\net6.0\WebX.Common.Filters.MvcApplicationPartsAssemblyInfo.cache

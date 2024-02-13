@@ -8,9 +8,9 @@ env:
   cdk-dir: ./cdk
   coverage-threshold: 0
   cdk_action: deploy
-#  aws_secret: ${{ secrets.AWS_SECRET}}
-#  aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID}}
-#  aws_region: ap-southeast-2
+  aws_secret: ${{ secrets.AWS_SECRET}}
+  aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID}}
+  aws_region: ap-southeast-2
   target_environment: dev
   aspnet_environment: Development
   run_number: ${{ github.run_number}}
@@ -33,11 +33,6 @@ jobs:
         with:
           dotnet-version: '6.x'
 
-#      - name: Add Github pacakges nuget source
-#      run: |
-#        dotnet nuget add source --username ${{ inputs.nuget-username}} --password ${{ inputs.team-pat }} --store-password-in-clear-text --name github 'https://nuget.pkg.github.com/${{inputs.repo-organisation}}/index.json'
-#      shell: bash
-
       - name: Install dependancies
         run: dotnet restore ${{env.src-dir}}
 
@@ -50,28 +45,28 @@ jobs:
       - name: Run unit tests
         run: dotnet test ${{env.src-dir}} --filter FullyQualifiedName~Tests --configuration Release --verbosity quiet --collect:"XPlat Code Coverage" --results-directory ./coverage /p:CollectCoverage=true
 
-#      - name: Configure AWS credentials
-#        uses: aws-actions/configure-aws-credentials@v1
-#        with:
-#          aws-access-key-id: ${{ env.aws_access_key_id }}
-#          aws-secret-access-key: ${{ env.aws_secret }}
-#          aws-region: ${{ env.aws_region }}
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ env.aws_access_key_id }}
+          aws-secret-access-key: ${{ env.aws_secret }}
+          aws-region: ${{ env.aws_region }}
 
-#      - name: install npm
-#        run: 'sudo apt update -y && sudo apt install nodejs npm -y'
+      - name: install npm
+        run: 'sudo apt update -y && sudo apt install nodejs npm -y'
 
-#      - name: Install AWS CDK and dependencies
-#        env:
-#          CDK_DIR: ${{ env.cdk-dir }}
-#        run: |
-#          sudo npm install -g aws-cdk
-#          cd $CDK_DIR
-#          sudo npm install
+      - name: Install AWS CDK and dependencies
+        env:
+          CDK_DIR: ${{ env.cdk-dir }}
+        run: |
+          sudo npm install -g aws-cdk
+          cd $CDK_DIR
+          sudo npm install
 
-#      - name: CDK Synth
-#        run: cdk synth
-#        working-directory: ${{ env.cdk-dir }}
+      - name: CDK Synth
+        run: cdk synth
+        working-directory: ${{ env.cdk-dir }}
 
-#      - name: CDK Deploy
-#        run: cdk deploy --require-approval never
-#        working-directory: ${{ env.cdk-dir }}
+      - name: CDK Deploy
+        run: cdk deploy --require-approval never
+        working-directory: ${{ env.cdk-dir }}
