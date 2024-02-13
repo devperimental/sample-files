@@ -98,14 +98,14 @@ export class LambdaFunctionConstruct extends Construct {
 
     if (props.isQueueTrigger) {
       // Create Queue
-      const primaryQueueName = `${functionName}-pq`;
+      const primaryQueueName = `${functionName}-q`;
       const deadLetterQueueName = `${functionName}-dlq`;
 
       const deadLetterQueue = new Queue(this, 'dlq', {
         queueName: deadLetterQueueName,
       });
 
-      this.primaryQueue = new Queue(this, 'pq', {
+      this.primaryQueue = new Queue(this, 'q', {
         queueName: primaryQueueName,
         deadLetterQueue: {
           queue: deadLetterQueue,
