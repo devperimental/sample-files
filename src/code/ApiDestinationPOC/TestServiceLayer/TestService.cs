@@ -6,6 +6,7 @@ using TestServiceLayer.Shared.Settings;
 using TestServiceLayer.Shared.Types;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System;
 
 namespace TestServiceLayer
 {
@@ -26,20 +27,31 @@ namespace TestServiceLayer
 
         public async Task HandleEventRule(EventRuleDetail eventRuleDetail)
         {
-            var eventBusEntry = new EventBusEntry
+            try
             {
-                DetailType = _eventRuleSettings.EventDetailType,
-                Detail = JsonSerializer.Serialize(eventRuleDetail),
-                EventBusName = _eventRuleSettings.EventBusName,
-                Source = _eventRuleSettings.EventSource
-            };
+                _logger.LogInformation("settings {@_eventRuleSettings}", _eventRuleSettings);
 
-            var response = await _eventbridgeWrapper.PutCustomEvent(eventBusEntry);
+                var eventBusEntry = new EventBusEntry
+                {
+                    DetailType = _eventRuleSettings.EventDetailType,
+                    Detail = JsonSerializer.Serialize(eventRuleDetail),
+                    EventBusName = _eventRuleSettings.EventBusName,
+                    Source = _eventRuleSettings.EventSource
+                };
 
-            if (!response)
-            {
-                _logger.LogWarning("Unable to submit event for {@eventRuleDetail}", eventRuleDetail);
+                var response = await _eventbridgeWrapper.PutCustomEvent(eventBusEntry);
+
+                if (!response)
+                {
+                    _logger.LogWarning("Unable to submit event for {@eventRuleDetail}", eventRuleDetail);
+                }
             }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message, ex);
+                throw;
+            }
+            
         }
 
         /*

@@ -22,7 +22,7 @@ var builder = Host.CreateDefaultBuilder(args)
             })
             .AddTransient(typeof(EventRuleSettings), c => {
                 
-                return new EventRuleSettings() { EventRuleQUrl = "https://sqs.ap-southeast-2.amazonaws.com/301804962855/event-rule-lambda-local-pq" };
+                return new EventRuleSettings() { EventRuleQUrl = "https://sqs.ap-southeast-2.amazonaws.com/301804962855/event-rule-source-dev-q" };
             })
             .AddTransient<ISqsWrapper, SqsWrapper>()
             .AddTransient<ITestClient, TestClient>()
