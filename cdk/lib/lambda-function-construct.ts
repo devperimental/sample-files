@@ -10,6 +10,7 @@ import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import { Queue } from 'aws-cdk-lib/aws-sqs';
 import { ILambdaSettings } from './service-types';
 import * as iam from 'aws-cdk-lib/aws-iam';
+import * as ssm from 'aws-cdk-lib/aws-ssm';
 
 export class LambdaFunctionConstruct extends Construct {
   public readonly lambdaFunction: lambda.Function;
@@ -20,25 +21,50 @@ export class LambdaFunctionConstruct extends Construct {
     super(scope, id);
 
     // VPC settings
-    const vpc = ec2.Vpc.fromVpcAttributes(this, 'lambda-vpc-dev', {
-      vpcId: 'vpc-0beebe340fe404572',
-      availabilityZones: ['ap-southeast-2a', 'ap-southeast-2b'],
-      privateSubnetIds: [
-        'subnet-0c94ad82febafd4a6',
-        'subnet-0f670ae640d7ce5ad',
-      ],
-    });
+    const vpcId = ssm.StringParameter.fromStringParameterName(
+      this,
+      'ssm-vpcId',
+      `/network/${props.targetEnvironment}/vpcId`
+    ).stringValue;
+    const privateSubnetIds = ssm.StringParameter.fromStringParameterName(
+      this,
+      'ssm-privateSubnetIds',
+      `/network/${props.targetEnvironment}/privateSubnetIds`
+    ).stringValue;
+
+    // VPC settings
+    const vpc = ec2.Vpc.fromVpcAttributes(
+      this,
+      `lambda-vpc-alt-${props.targetEnvironment}`,
+      {
+        vpcId: vpcId,
+        availabilityZones: ['ap-southeast-2a', 'ap-southeast-2b'],
+        privateSubnetIds: JSON.parse(privateSubnetIds),
+      }
+    );
+
+    const egressSecurityGroupId = ssm.StringParameter.fromStringParameterName(
+      this,
+      'ssm-egressSecurityGroupId',
+      `/network/${props.targetEnvironment}/egressSecurityGroupId`
+    ).stringValue;
 
     const egressSg = ec2.SecurityGroup.fromSecurityGroupId(
       this,
-      'lambda-egress-sg',
-      'sg-0c32437a66bfaeeeb'
+      `lambda-egress-sg-alt-${props.targetEnvironment}`,
+      egressSecurityGroupId
     );
+
+    const vpeSecurityGroupId = ssm.StringParameter.fromStringParameterName(
+      this,
+      'ssm-vpeSecurityGroupId',
+      `/network/${props.targetEnvironment}/vpeSecurityGroupId`
+    ).stringValue;
 
     const vpeSg = ec2.SecurityGroup.fromSecurityGroupId(
       this,
-      'lambda-vpe-sg',
-      'sg-0140632bca8580449'
+      `lambda-vpe-sg-alt-${props.targetEnvironment}`,
+      vpeSecurityGroupId
     );
 
     const functionName = props.functionName;
