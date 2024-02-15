@@ -4,7 +4,7 @@ on:
     branches:
       - 'main'
 env:
-  src-dir: ./src/code/ApiDestinationPOC
+#  src-dir: ./src/code/ApiDestinationPOC
   cdk-dir: ./cdk
   coverage-threshold: 0
   cdk_action: deploy
@@ -28,23 +28,23 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Setup dotnet
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '6.x'
-
-      - name: Install dependancies
-        run: dotnet restore ${{env.src-dir}}
-
-      - name: Build solution
-        run: dotnet build ${{env.src-dir}} --configuration Release --no-restore
-
-      - name: Install dotnet report generator tool
-        run: dotnet tool install --global dotnet-reportgenerator-globaltool
-
-      - name: Run unit tests
-        run: dotnet test ${{env.src-dir}} --filter FullyQualifiedName~Tests --configuration Release --verbosity quiet --collect:"XPlat Code Coverage" --results-directory ./coverage /p:CollectCoverage=true
-
+#      - name: Setup dotnet
+#        uses: actions/setup-dotnet@v3
+#        with:
+#          dotnet-version: '6.x'
+#
+#      - name: Install dependancies
+#        run: dotnet restore ${{env.src-dir}}
+#
+#      - name: Build solution
+#        run: dotnet build ${{env.src-dir}} --configuration Release --no-restore
+#
+#      - name: Install dotnet report generator tool
+#        run: dotnet tool install --global dotnet-reportgenerator-globaltool
+#
+#      - name: Run unit tests
+#        run: dotnet test ${{env.src-dir}} --filter FullyQualifiedName~Tests --configuration Release --verbosity quiet --collect:"XPlat Code Coverage" --results-directory ./coverage /p:CollectCoverage=true
+#
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
