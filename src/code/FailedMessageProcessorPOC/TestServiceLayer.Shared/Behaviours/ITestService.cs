@@ -6,5 +6,7 @@ namespace TestServiceLayer.Shared.Behaviours
     public interface ITestService
     {
         Task HandleEventRule(EventRuleDetail eventRuleDetail);
+        Task SubmitEventBusEntry(string eventBusEntryJson);
+        Task ProcessDLQMessages();
     }
 }

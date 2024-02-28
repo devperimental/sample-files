@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AWSServiceWrapper.Shared.Types
+﻿namespace AWSServiceWrapper.Shared.Types
 {
     public class WrapperMessageAttributeValue
     {

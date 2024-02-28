@@ -1,7 +1,6 @@
 ﻿using Helper.Startup.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Text.Json;
 using TestServiceLayer.Shared.Behaviours;
 using TestServiceLayer.Shared.Types;
 
@@ -23,14 +22,19 @@ static async Task RunHarness(IServiceProvider hostProvider)
     
     var testService = provider.GetRequiredService<ITestService>();
 
-    var eventRuleDetail = new EventRuleDetail
+    for(var i=0; i<10; i++)
     {
-        RequestId = Guid.NewGuid().ToString(),
-        IdempotencyKey = Guid.NewGuid().ToString(),
-        PartnerName = "PartnerConsoleApp"
-    };
+        var eventRuleDetail = new EventRuleDetail
+        {
+            RequestId = Guid.NewGuid().ToString(),
+            IdempotencyKey = Guid.NewGuid().ToString(),
+            PartnerName = "PartnerConsoleApp"
+        };
 
-    await testService.HandleEventRule(eventRuleDetail);
+        await testService.HandleEventRule(eventRuleDetail);
+
+
+    }
 
     Console.WriteLine();
 }

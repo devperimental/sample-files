@@ -10,5 +10,9 @@ namespace AWSServiceWrapper.Shared.Behaviours
             string queueUrl,
             string messageBody,
             Dictionary<string, WrapperMessageAttributeValue> wrapperMessageAttributes);
+
+        Task<MappedSqsMessage> GetMessage(string queueUrl);
+
+        Task DeleteMessage(string receiptHandle, string queueUrl);
     }
 }

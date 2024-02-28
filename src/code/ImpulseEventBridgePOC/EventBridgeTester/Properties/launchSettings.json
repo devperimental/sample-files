@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "EventBridgeTester": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Local",
+        "ENVIRONMENT_NAME": "local"
+      }
+    }
+  }
+}

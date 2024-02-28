@@ -13,14 +13,20 @@ namespace TestServiceLayer
     public class TestService : ITestService
     {
         private readonly EventRuleSettings _eventRuleSettings;
+        private readonly DLQSettings _dlqSettings;
         private readonly IEventbridgeWrapper _eventbridgeWrapper;
+        private readonly ISqsWrapper _sqsWrapper;
         private readonly ILogger<TestService> _logger;
 
-        public TestService(EventRuleSettings eventRuleSettings, 
-            IEventbridgeWrapper eventbridgeWrapper, 
+        public TestService(EventRuleSettings eventRuleSettings,
+            DLQSettings dlqSettings,
+            IEventbridgeWrapper eventbridgeWrapper,
+            ISqsWrapper sqsWrapper,
             ILogger<TestService> logger) {
             _eventRuleSettings = eventRuleSettings;
+            _dlqSettings = dlqSettings;
             _eventbridgeWrapper = eventbridgeWrapper;
+            _sqsWrapper = sqsWrapper;
             _logger = logger;
         }
 
@@ -54,6 +60,25 @@ namespace TestServiceLayer
             
         }
 
+        public async Task SubmitEventBusEntry(string eventBusEntryJson)
+        {
+            try
+            {
+                _logger.LogInformation("settings {@_eventRuleSettings}", _eventRuleSettings);
+                var eventBusMessage = JsonSerializer.Deserialize<EventBusMessage>(eventBusEntryJson);
+
+                if (eventBusMessage != null)
+                {
+                    await HandleEventRule(eventBusMessage.Detail!);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message, ex);
+                throw;
+            }
+        }
+
         /*
          {
               "version": "0",
@@ -70,5 +95,42 @@ namespace TestServiceLayer
               }
             } 
          * */
+
+        public async Task ProcessDLQMessages()
+        {
+            var messageRetrievedCount = 0;
+
+            while (messageRetrievedCount < _dlqSettings.BatchSize)
+            {
+                if (string.IsNullOrEmpty(_dlqSettings.QueueName))
+                {
+                    _logger.LogWarning("_dlqSettings.QueueName is empty in TestService");
+                    break;
+                }
+
+                // Retrieve queue message
+                var messageFromQueue = await _sqsWrapper.GetMessage(_dlqSettings.QueueName!);
+
+                // if message is null break;
+                if (messageFromQueue == null)
+                {
+                    _logger.LogWarning("ProcessDLQMessages->GetMessage returned empty stopping processing");
+                    break;
+                }
+
+                try
+                {
+                    // Place message back in event bus
+                    await SubmitEventBusEntry(messageFromQueue.MessageBody!);
+
+                    // delete message
+                    await _sqsWrapper.DeleteMessage(messageFromQueue.ReceiptHandle!, _dlqSettings.QueueName!);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError("Error in ProcessDLQMessages", ex);
+                }
+            }
+        }
     }
 }

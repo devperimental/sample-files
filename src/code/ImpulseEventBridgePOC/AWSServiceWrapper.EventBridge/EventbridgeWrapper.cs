@@ -25,6 +25,7 @@ namespace AWSServiceWrapper.EventBridge
             _amazonEventBridge = amazonEventBridge;
             _logger = logger;
         }
+
         /// <summary>
         /// Add an event to the event bus.
         /// </summary>
@@ -51,6 +52,11 @@ namespace AWSServiceWrapper.EventBridge
                 });
 
                 success = response.FailedEntryCount == 0;
+
+                if (!success)
+                {
+                    _logger.LogWarning("{FailedEntryCount} {ErrorMessage} {@eventBusEntry}", response.FailedEntryCount, response.Entries[0].ErrorMessage, eventBusEntry);
+                }
             }
             catch(Exception ex)
             {
